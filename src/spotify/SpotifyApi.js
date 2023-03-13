@@ -9,10 +9,6 @@ const client_id = process.env.REACT_APP_SPOTIFY_CLIENT_ID;
 const client_secret = process.env.REACT_APP_SPOTIFY_CLIENT_SECRET;
 const refresh_token = process.env.REACT_APP_SPOTIFY_REFRESH_TOKEN;
 
-console.log(client_id);
-console.log(client_secret);
-console.log(refresh_token);
-
 const getAccessToken = async () => {
   const basic = Buffer.from(`${client_id}:${client_secret}`).toString("base64");
 
