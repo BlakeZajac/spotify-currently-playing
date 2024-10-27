@@ -4,18 +4,6 @@ This is a module that uses Spotify's web API to fetch and return the user's curr
 
 - https://spotify-currently-playing-gilt.vercel.app/
 
-## Features
-
-- Fetches the user's current playing song using Spotify's web API.
-- Provides a simple and easy-to-use interface to retrieve the data in a React app.
-- Uses `fetch()` to make API requests and handles token refresh with a user's refresh token.
-
-## Requirements
-
-- You must have a Spotify account and a registered Spotify App.
-- You must provide your Spotify client ID, client secret, and refresh token in your environment variables.
-- Your app must be able to make requests to the Spotify Web API.
-
 ## Guide
 
 ### Step 1: Setting up your Spotify API
