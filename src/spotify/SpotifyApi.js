@@ -21,8 +21,16 @@ const getAccessToken = async () => {
     body: querystring.stringify({
       grant_type: "refresh_token",
       refresh_token,
+      redirect_uri: "http://localhost:3000",
     }),
   });
+
+  if (!response.ok) {
+    const errorText = await response.text();
+    console.error(`Error getting access token: ${response.status}`);
+    console.error(`Response body: ${errorText}`);
+    throw new Error(`HTTP error! status: ${response.status}`);
+  }
 
   return response.json();
 };
@@ -60,23 +68,35 @@ export default async function getNowPlayingItem(
   client_secret,
   refresh_token
 ) {
-  const response = await getNowPlaying(client_id, client_secret, refresh_token);
-  if (response.status === 204 || response.status > 400) {
-    return false;
+  try {
+    const response = await getNowPlaying(
+      client_id,
+      client_secret,
+      refresh_token
+    );
+
+    if (response.status === 204 || response.status > 400) {
+      console.error(`Error fetching now playing data: ${response.status}`);
+      const errorText = await response.text();
+      console.error(`Response body: ${errorText}`);
+      return false;
+    }
+
+    const song = await response.json();
+    const albumImageUrl = song.item.album.images[0].url;
+    const artist = song.item.artists.map((_artist) => _artist.name).join(", ");
+    const isPlaying = song.is_playing;
+    const songUrl = song.item.external_urls.spotify;
+    const title = song.item.name;
+
+    return {
+      albumImageUrl,
+      artist,
+      isPlaying,
+      songUrl,
+      title,
+    };
+  } catch (error) {
+    console.error('Error in getNowPlayingItem:', error);
   }
-
-  const song = await response.json();
-  const albumImageUrl = song.item.album.images[0].url;
-  const artist = song.item.artists.map((_artist) => _artist.name).join(", ");
-  const isPlaying = song.is_playing;
-  const songUrl = song.item.external_urls.spotify;
-  const title = song.item.name;
-
-  return {
-    albumImageUrl,
-    artist,
-    isPlaying,
-    songUrl,
-    title,
-  };
 }
