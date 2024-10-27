@@ -8,7 +8,7 @@ This is a module that uses Spotify's web API to fetch and return the user's curr
 
 ### Step 1: Setting up your Spotify API
 
-1. Go to Spotify for Developers — https://developer.spotify.com/
+1. Go to Spotify for Developers — https://developer.spotify.com/.
 2. Login with your Spotify account then navigate to the dashboard. Click on ‘Create App’.
 3. Add in the details for you app and click on save. Set the Website URL (Can be your website’s URL) and Redirect URI to ‘https://localhost:3000’
 4. Now go to the settings page of the new app and make note of the Client Id and Client Secret.
