@@ -21,7 +21,6 @@ const getAccessToken = async () => {
     body: querystring.stringify({
       grant_type: "refresh_token",
       refresh_token,
-      redirect_uri: "http://localhost:3000",
     }),
   });
 
