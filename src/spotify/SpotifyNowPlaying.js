@@ -1,18 +1,16 @@
-import { Box, Image, Link, Spinner, Stack, Text } from "@chakra-ui/react";
 import { useEffect, useState } from "react";
+import { Box, Image, Link, Spinner, Stack, Text } from "@chakra-ui/react";
 import styled from "styled-components";
+
 import PlayingAnimation from "../spotify/PlayingAnimation";
 import getNowPlayingItem from "../spotify/SpotifyApi";
 import SpotifyLogo from "../spotify/SpotifyLogo";
 
 const SpotifyNowPlaying = (props) => {
-  // state variables to keep track of loading status and result data
   const [loading, setLoading] = useState(true);
   const [result, setResult] = useState({});
 
-  // useEffect hook to fetch data when component mounts
   useEffect(() => {
-    // call the getNowPlayingItem function and pass in props
     Promise.all([
       getNowPlayingItem(
         props.client_id,
@@ -25,7 +23,6 @@ const SpotifyNowPlaying = (props) => {
     });
   });
 
-  // render the component with conditional logic based on loading status and API result data
   return (
     <Center>
       <Box width="xs">
